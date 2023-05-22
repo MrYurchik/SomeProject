@@ -15,7 +15,6 @@ def compress_the_string(number: int):
     result.append([count, past])
     return result
 
-
 # if __name__ == '__main__':
 #     compress_the_string(a)
 #     compress_the_string('asd')

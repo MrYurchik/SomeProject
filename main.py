@@ -22,16 +22,16 @@ async def root():
 @app.get("/get_problem/{problem_name}", response_class=HTMLResponse)
 @app.get("/get_problem/", response_class=HTMLResponse)
 async def get_problem(request: Request, problem_name: Optional[str] = None):
-    print(f"Problem name {problem_name}")
     with open("config.json", "r+") as file:
         content = json.loads(file.read())
 
     if problem_name:
-        print('PROBLEM NAME ')
         if problem_name in content:
-            return templates.TemplateResponse("item.html", {"request": request, "id": problem_name, "items": content[problem_name]})
+            return templates.TemplateResponse("item.html",
+                                              {"request": request, "id": problem_name, "items": content[problem_name]})
         else:
-            return templates.TemplateResponse("error.html", {"request": request, "error_massage": f"No course wih name {problem_name}.\n All available names {list(content.keys())}"})
+            return templates.TemplateResponse("error.html", {"request": request,
+                                                             "error_massage": f"No course wih name {problem_name}.\n All available names {list(content.keys())}"})
 
     else:
         return templates.TemplateResponse("item.html", {"request": request, "id": problem_name, "items": []})
@@ -41,8 +41,9 @@ async def get_problem(request: Request, problem_name: Optional[str] = None):
 async def view_problem(request: Request, problem_id: int):
     with open("config.json", "r+") as file:
         content = json.loads(file.read())
-        content = content["Pythonist 3"][problem_id-1]
-    return templates.TemplateResponse("problem_solver.html", {"request": request, "problem_id": problem_id, "problem": content})
+        content = content["Pythonist 3"][problem_id - 1]
+    return templates.TemplateResponse("problem_solver.html",
+                                      {"request": request, "problem_id": problem_id, "problem": content})
 
 
 @app.post("/submit")
