@@ -36,17 +36,18 @@ async def get_problem(request: Request, problem_name: Optional[str] = None):
     else:
         return templates.TemplateResponse("item.html", {"request": request, "id": problem_name, "items": []})
 
+
 @app.get("/view_problem/{problem_id}", response_class=HTMLResponse)
 async def view_problem(request: Request, problem_id: int):
     with open("config.json", "r+") as file:
         content = json.loads(file.read())
-        # тимчасова затичка під одну задачу
-        content = content["Pythonist 3"][4]
+        content = content["Pythonist 3"][problem_id-1]
     return templates.TemplateResponse("problem_solver.html", {"request": request, "problem_id": problem_id, "problem": content})
 
 
 @app.post("/submit")
 async def submit(user_input: int = Form(...)):
+    # Затичка під одну задачу
     return {"solution of the problem": compress_the_string(user_input)}
 
 

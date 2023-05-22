@@ -15,7 +15,7 @@
     </tr>
     {% for item in items %}
     <tr>
-        <td>{{item.problem_name}}</td>
+        <td><a href={{item.local_url}}> {{item.problem_name}}</a></td>
         <td>{{item.problem_url}}</td>
         <td>{{item.problem_description}}</td>
         <td>{{item.default_input_data}}</td>
