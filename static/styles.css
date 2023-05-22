@@ -1,0 +1,18 @@
+h1 {
+    color: green;
+}
+h2 {
+    color: blue;
+}
+
+table, th, td {
+
+  border: 1px solid;
+  color: blue;
+  text-align: center;
+}
+
+tr:hover {
+     background: coral;
+}
+
