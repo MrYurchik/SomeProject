@@ -1,18 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}<h1>Problem solver page</h1>{% endblock %}
+
+{% block content %}
 <h1>{{problem.problem_name}}</h1>
 <h2>Problem description {{problem.problem_description}}</h2>
 <h2>Default input is {{problem.default_input_data}}</h2>
 <form action="/submit" method="POST">
     <h3>Enter requirements input</h3>
     <p><input type='number' name='user_input'/></p>
-    <p><input type='submit' value='Login'/></p>
+    <p><input type='submit' value='Submit'/></p>
 </form>
-
-</body>
-</html>
+{% endblock %}

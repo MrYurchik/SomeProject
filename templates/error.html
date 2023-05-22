@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Error Title</title>
+{% extends "base.html" %}
+{% block title %}
+<h1>Problem name: {{ problem_name }}</h1>
+{% endblock %}
+{% block content %}
 
-</head>
-<body>
-<h1> Error Title </h1>
 <h2>This is error page. This error occurred due to {{error_massage}}</h2>
-</body>
-</html>
+
+{% endblock %}

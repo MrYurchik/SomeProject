@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+{{ super() }}
+<style type="text/css">
+        .important { color: #336699; }
+
+</style>
+{% endblock %}
+{% block content %}
+<h1>Problem name: {{ problem_name }}</h1>
+<table>
+    <tr>
+        <th>problem name</th>
+        <th>problem url</th>
+        <th>problem description</th>
+        <th>default input data</th>
+    </tr>
+    {% for item in items %}
+    <tr>
+        <td><a href={{item.local_url}}> {{item.problem_name}}</a></td>
+        <td>{{item.problem_url}}</td>
+        <td>{{item.problem_description}}</td>
+        <td>{{item.default_input_data}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

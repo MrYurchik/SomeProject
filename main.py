@@ -27,14 +27,14 @@ async def get_problem(request: Request, problem_name: Optional[str] = None):
 
     if problem_name:
         if problem_name in content:
-            return templates.TemplateResponse("item.html",
+            return templates.TemplateResponse("problem_list.html",
                                               {"request": request, "id": problem_name, "items": content[problem_name]})
         else:
             return templates.TemplateResponse("error.html", {"request": request,
                                                              "error_massage": f"No course wih name {problem_name}.\n All available names {list(content.keys())}"})
 
     else:
-        return templates.TemplateResponse("item.html", {"request": request, "id": problem_name, "items": []})
+        return templates.TemplateResponse("problem_list.html", {"request": request, "id": problem_name, "items": []})
 
 
 @app.get("/view_problem/{problem_id}", response_class=HTMLResponse)
