@@ -1,11 +1,11 @@
 import json
+from typing import Optional
 
 import uvicorn
-from fastapi import FastAPI, Request, Form
-from starlette.responses import HTMLResponse
+from fastapi import FastAPI, Form, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from typing import Optional
+from starlette.responses import HTMLResponse
 
 from compress_the_string import compress_the_string
 
@@ -27,11 +27,17 @@ async def get_problem(request: Request, problem_name: Optional[str] = None):
 
     if problem_name:
         if problem_name in content:
-            return templates.TemplateResponse("problem_list.html",
-                                              {"request": request, "id": problem_name, "items": content[problem_name]})
+            return templates.TemplateResponse(
+                "problem_list.html", {"request": request, "id": problem_name, "items": content[problem_name]}
+            )
         else:
-            return templates.TemplateResponse("error.html", {"request": request,
-                                                             "error_massage": f"No course wih name {problem_name}.\n All available names {list(content.keys())}"})
+            return templates.TemplateResponse(
+                "error.html",
+                {
+                    "request": request,
+                    "error_massage": f"No course wih name {problem_name}.\n All available names {list(content.keys())}",
+                },
+            )
 
     else:
         return templates.TemplateResponse("problem_list.html", {"request": request, "id": problem_name, "items": []})
@@ -42,8 +48,9 @@ async def view_problem(request: Request, problem_id: int):
     with open("config.json", "r+") as file:
         content = json.loads(file.read())
         content = content["Pythonist 3"][problem_id - 1]
-    return templates.TemplateResponse("problem_solver.html",
-                                      {"request": request, "problem_id": problem_id, "problem": content})
+    return templates.TemplateResponse(
+        "problem_solver.html", {"request": request, "problem_id": problem_id, "problem": content}
+    )
 
 
 @app.post("/submit")
